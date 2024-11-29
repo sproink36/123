@@ -104,6 +104,7 @@ import DecisionBlock from "../components/DecisionBlock.vue";
     </div>
     <iframe src="/qr-mech/index.html" width="100%"></iframe>
     <DecisionBlock />
+    ы
   </div>
 </template>
 
