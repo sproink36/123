@@ -1,37 +1,29 @@
 <template>
   <header class="header" :class="{ white_wall: isOpenBurger }">
-    <Logo class="header__logo" />
-    <ul class="list" v-if="mediaLarge">
-      <li class="item">
-        <a class="link" ef="#">Преимущества</a>
-      </li>
-      <li class="item">
-        <a class="link" ef="#">Расширение/плагин</a>
-      </li>
-      <li class="item">
-        <a class="link" ef="#">FAQ</a>
-      </li>
-    </ul>
-    <div class="block">
-      <GenerateQRButton />
-      <Button
-        class="header__button"
-        borderColor="#18213C"
-        bgColor="#18213C"
-        textColor="white"
-      >
-        <template v-if="mediaLarge">Войти или зарегистрироваться</template>
-        <User v-else />
-      </Button>
-    </div>
-    <div
-      class="burger-btn"
-      v-if="!mediaLarge"
-      :class="{ burger_open: isOpenBurger }"
-      @click="toggleModal"
-    >
-      <div class="lines">
-        <div class="line"></div>
+    <div class="container header__container">
+      <Logo class="header__logo" />
+      <ul class="list" v-if="mediaLarge">
+        <li class="item">
+          <a class="link" ef="#">Преимущества</a>
+        </li>
+        <li class="item">
+          <a class="link" ef="#">Расширение/плагин</a>
+        </li>
+        <li class="item">
+          <a class="link" ef="#">FAQ</a>
+        </li>
+      </ul>
+      <div class="block">
+        <GenerateQRButton />
+        <Button class="header__button" borderColor="#18213C" bgColor="#18213C" textColor="white">
+          <template v-if="mediaLarge">Войти или зарегистрироваться</template>
+          <User v-else />
+        </Button>
+      </div>
+      <div class="burger-btn" v-if="!mediaLarge" :class="{ burger_open: isOpenBurger }" @click="toggleModal">
+        <div class="lines">
+          <div class="line"></div>
+        </div>
       </div>
     </div>
     <Teleport to="body">
@@ -44,13 +36,7 @@
                   <a href="#">{{ item }}</a>
                 </li>
               </ul>
-              <Button
-                class="burger__btn"
-                borderColor="#18213C"
-                bgColor="#18213C"
-                textColor="white"
-                width="100%"
-              >
+              <Button class="burger__btn" borderColor="#18213C" bgColor="#18213C" textColor="white" width="100%">
                 Сгенерировать куаркод
               </Button>
               <div class="burger__links">
@@ -110,7 +96,7 @@ function toggleModal() {
   }
 }
 
-onUpdated(() => {});
+onUpdated(() => { });
 </script>
 
 <style lang="scss" scoped>
@@ -119,14 +105,13 @@ onUpdated(() => {});
 @use "/src/assets/scss/includes/variables" as *;
 
 .header {
-  display: flex;
-  align-items: center;
+  width: 100%;
   z-index: 555;
   background-color: white;
   position: relative;
 
   @include media-queries.media-large {
-    padding: 40px 40px 0 40px;
+    // padding: 40px 40px 0 40px;
     margin-bottom: 112px;
   }
 
@@ -153,9 +138,20 @@ onUpdated(() => {});
   }
 }
 
+.header__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @include media-queries.media-large {
+    max-width: 1840px;
+  }
+}
+
 .header__logo {
-  margin-right: min(100px, 70px);
   z-index: 50;
+  width: 100px;
+  height: 100px;
 
   @include media-queries.media-small {
     width: 60px;
@@ -169,9 +165,13 @@ onUpdated(() => {});
   align-items: center;
   gap: 40px;
   height: 84px;
-  margin-right: 190px;
   padding: 0 30px;
   background-color: #f3f5f7;
+
+  @include media-queries.media-large {
+  margin-left: auto;
+    
+  }
 }
 
 .link {
@@ -184,17 +184,20 @@ onUpdated(() => {});
 .block {
   display: flex;
   gap: 10px;
+
+  @include media-queries.media-large {
+  margin-left: 190px;
+    
+  }
+
   @include media-queries.media-medium {
-    margin-right: 60px;
     gap: 16px;
   }
 
   @include media-queries.media-small {
-    margin-right: 41px;
   }
 
   @media (max-width: 350px) {
-    margin-right: auto;
   }
 }
 
@@ -202,6 +205,7 @@ onUpdated(() => {});
   @include media-queries.media-large {
     width: 379px;
   }
+
   @include media-queries.media-medium {
     @include circle;
     width: 100px;

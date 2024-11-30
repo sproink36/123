@@ -25,10 +25,10 @@ html {
   margin: 0;
   padding: 0;
   font-size: 17px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
+  // -ms-text-size-adjust: 100%;
+  // -webkit-text-size-adjust: 100%;
   touch-action: pan-x pan-y;
-  zoom: 1;
+  // zoom: 1;
   // overflow-x: hidden;
 }
 
@@ -39,12 +39,28 @@ body {
   touch-action: pan-x pan-y;
   // overflow-x: hidden;
   // overflow: hidden;
+  overflow-x: hidden;
+}
+
+html {
+  //
+  
 }
 
 html,
 body {
   min-height: 100dvh;
+  // overflow-x: hidden;
 }
+
+// body {
+//   outline: 3px solid red; /* Красная рамка для body */
+  
+// }
+
+// * {
+//   outline: 1px dashed blue; /* Голубая рамка для всех элементов */
+// }
 
 body.frozen {
   overflow: hidden;

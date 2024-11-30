@@ -1,0 +1,127 @@
+<template>
+    <div class="block" :style="{ backgroundColor: bgColor }">
+        <div class="container block__container">
+            <H3Title class="title">
+                <slot name="title" />
+            </H3Title>
+            <p class="text">
+                <slot name="text" />
+            </p>
+            <div class="img_block">
+                <img :src="imgSRC">
+            </div>
+        </div>
+    </div>
+</template>
+<script setup lang='js'>
+import H3Title from './H3Title.vue';
+defineProps({
+    bgColor: String,
+    imgSRC: String,
+})
+</script>
+<style lang='scss'>
+@use "/src/assets/scss/includes/media-queries";
+
+.block {
+    position: relative;
+    border-radius: 40px;
+
+    @include media-queries.media-large {
+        height: 542px;
+    }
+
+    @include media-queries.media-medium {
+        height: 614px;
+    }
+
+    @include media-queries.media-small {
+
+        height: 369px;
+    }
+}
+
+.block__container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+
+    @include media-queries.media-large {
+        padding: 80px 80px 0 80px;
+
+        gap: 20px;
+    }
+
+    @include media-queries.media-medium {
+        padding: 40px;
+        justify-content: flex-end;
+        gap: 20px;
+    }
+
+    @include media-queries.media-small {
+        padding: 20px;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+}
+
+.title {}
+
+.text {
+    //styleName: Desktop/Paragraph - Text;
+    color: rgba(24, 33, 60, 0.7);
+    text-underline-position: from-font;
+    text-align: center;
+    font-weight: 400;
+    text-wrap: balance;
+    width: 100%;
+
+    @include media-queries.media-large {
+        line-height: 32px;
+        font-size: 24px;
+        text-align: left;
+        max-width: 680px;
+    }
+
+
+    @include media-queries.media-small {
+        font-size: 14px;
+        line-height: 24px;
+    }
+}
+
+.img_block {
+    position: absolute;
+
+    @include media-queries.media-large {
+        width: 582px;
+        height: 480px;
+        top: 30px;
+        right: 30px;
+        bottom: 30px;
+    }
+
+    @include media-queries.media-medium {
+        width: 506px;
+        height: 418px;
+        top: -71px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    @include media-queries.media-small {
+        transform: translateX(-50%);
+        width: 233px;
+        height: 193px;
+        top: 0;
+    }
+
+    & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+</style>

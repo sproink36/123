@@ -24,6 +24,7 @@ import H1Title from "../components/H1Title.vue";
 import BrowserButton from "../components/BrowserButton.vue";
 import H2Title from "../components/H2Title.vue";
 import DecisionBlock from "../components/DecisionBlock.vue";
+import BenefitsSection from "../components/BenefitsSection.vue";
 
 // gsap.registerPlugin(ScrollTrigger);
 
@@ -102,9 +103,9 @@ import DecisionBlock from "../components/DecisionBlock.vue";
       </p>
       <BrowserButton class="main__btn">Скачать для браузера</BrowserButton>
     </div>
-    <iframe src="/qr-mech/index.html" width="100%"></iframe>
+    <!-- <iframe src="/qr-mech/index.html" width="100%"></iframe> -->
     <DecisionBlock />
-    ы
+    <BenefitsSection />
   </div>
 </template>
 
@@ -113,7 +114,8 @@ import DecisionBlock from "../components/DecisionBlock.vue";
 .main {
   display: flex;
   flex-direction: column;
-
+  align-items: center;
+  
   & .main__btn {
     margin-bottom: 120px;
 
