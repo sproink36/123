@@ -9,7 +9,7 @@
     </div>
 </template>
 
-<!-- <style>
+<style>
     .preloader {
         position: fixed;
         z-index: 10000;
@@ -29,4 +29,4 @@
         left: calc(50% - 100px);
         transform: rotate(45deg);
     }
-</style> -->
+</style>
