@@ -5,12 +5,14 @@ import { store } from './store'
 import router from './router'
 import VueScrollTo from 'vue-scrollto'
 import Katex from 'vue-katex-auto-render'
-
+import { useAccordion } from "vue3-rich-accordion";
+import "vue3-rich-accordion/accordion-library-styles.scss";
 const app = createApp(App)
-
+app.use(useAccordion);
 app.directive('katex', Katex);
 app.use(store)
 app.use(router)
+
 app.use(VueScrollTo, {
     container: "body",
     duration: 500,
@@ -24,4 +26,5 @@ app.use(VueScrollTo, {
     x: false,
     y: true
 })
+
 app.mount('#app')
