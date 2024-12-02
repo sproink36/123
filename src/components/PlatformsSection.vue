@@ -2,12 +2,17 @@
   <div class="platform">
     <div class="container platform__container">
       <H2Title class="title">Полный контроль<br />на всех платформах</H2Title>
+      <div class="img_wrapper">
+        <img src="/src/assets/img/Portfolio V2 Cover - Copy@2-800x800 1.png">
+      </div>
       <div class="grid_block">
         <div class="website">
           <div class="header">
             <H4Title class="title">Всё в одном месте <br />— наш сайт</H4Title>
             <ButtonBadge class="badge_btn">
-              <template v-slot:icon><BrowserColor /></template>
+              <template v-slot:icon>
+                <BrowserColor />
+              </template>
               <template v-slot:text>сайт</template>
             </ButtonBadge>
           </div>
@@ -17,18 +22,14 @@
             Всё под рукой для<br />
             удобства и продуктивности.
           </p>
-          <Button
-            class="btn"
-            borderColor="#18213C"
-            bgColor="#18213C"
-            textColor="white"
-            >Подробнее</Button
-          >
+          <Button class="btn" borderColor="#18213C" bgColor="#18213C" textColor="white">Подробнее</Button>
         </div>
         <div class="extension">
           <div class="header">
             <ButtonBadge class="badge_btn">
-              <template v-slot:icon><Puzzle /></template>
+              <template v-slot:icon>
+                <Puzzle />
+              </template>
               <template v-slot:text>расширение</template>
             </ButtonBadge>
             <H4Title class="title">Ваш помощник в браузере</H4Title>
@@ -49,29 +50,29 @@
               </p>
               <div class="cuarcod_block">
                 <div class="block">
-                  <div class="cuar"><CuarcodSmall /></div>
+                  <div class="cuar">
+                    <CuarcodSmall />
+                  </div>
                   <p>куаркод.рф</p>
                 </div>
                 <div class="block">
-                  <div class="pin"><Pin /></div>
+                  <div class="pin">
+                    <Pin />
+                  </div>
                   <div class="more_vert">
                     <MoreVert />
                   </div>
                 </div>
               </div>
             </div>
-            <Button
-              class="btn"
-              borderColor="#18213C"
-              bgColor="#18213C"
-              textColor="white"
-              >Подробнее</Button
-            >
+            <Button class="btn" borderColor="#18213C" bgColor="#18213C" textColor="white">Подробнее</Button>
           </div>
         </div>
         <div class="figma_plugin">
           <ButtonBadge class="badge_btn">
-            <template v-slot:icon><Lightning /></template>
+            <template v-slot:icon>
+              <Lightning />
+            </template>
             <template v-slot:text>плагин для Figma</template>
           </ButtonBadge>
           <div class="text">Скоро...</div>
@@ -102,6 +103,7 @@ import H4Title from "./H4Title.vue";
 .platform {
   width: 100%;
   height: auto;
+
   @include media-queries.media-large {
     margin-bottom: 120px;
   }
@@ -117,12 +119,56 @@ import H4Title from "./H4Title.vue";
 
 .platform__container {
   padding-top: 0;
-  & > .title {
+  position: relative;
+
+  &>.title {
     text-align: left;
     margin-bottom: 20px;
-    
+
     @include media-queries.media-small {
       margin-bottom: 24px;
+    }
+  }
+}
+
+.img_wrapper {
+  position: absolute;
+  width: 628px;
+  height: 628px;
+  overflow: hidden;
+  top: 310px;
+  right: 310px;
+  z-index: 8;
+
+  & img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  @include media-queries.media-medium {
+    width: 404px;
+    height: 404px;
+    top: 290px;
+    right: -40px;
+
+    & img {
+      top: 0px;
+      left: 146px;
+      transform: rotateZ(21deg);
+    }
+  }
+
+  @include media-queries.media-small {
+    width: 189px;
+    height: 189px;
+    top: 310px;
+    right: 0;
+    & img {
+      top: 0px;
+      left: 75px;
+      transform: rotateZ(7deg);
     }
   }
 }
@@ -141,12 +187,14 @@ import H4Title from "./H4Title.vue";
     "figma_plugin";
   row-gap: 20px;
 
-  & > div {
+  &>div {
     border-radius: 40px;
+
     @include media-queries.media-small {
       border-radius: 30px;
     }
   }
+
   //   & div {
   //     border: 1px solid red;
   //   }
@@ -160,10 +208,10 @@ import H4Title from "./H4Title.vue";
       "figma_plugin . extension"
       ". . extension";
   }
-  @include media-queries.media-medium {
-  }
-  @include media-queries.media-small {
-  }
+
+  @include media-queries.media-medium {}
+
+  @include media-queries.media-small {}
 }
 
 .text {
@@ -171,6 +219,7 @@ import H4Title from "./H4Title.vue";
   font-weight: 400;
   line-height: 32px;
   text-align: left;
+
   @include media-queries.media-small {
     font-size: 14px;
     line-height: 24px;
@@ -181,6 +230,8 @@ import H4Title from "./H4Title.vue";
   grid-area: website;
   background-color: #f7e8ff;
   padding: 30px;
+  z-index: 6;
+
   & .header {
     display: flex;
     align-items: center;
@@ -215,20 +266,22 @@ import H4Title from "./H4Title.vue";
     }
   }
 
-  @include media-queries.media-large {
-  }
-  @include media-queries.media-medium {
-  }
+  @include media-queries.media-large {}
+
+  @include media-queries.media-medium {}
+
   @include media-queries.media-small {
     padding: 20px;
   }
 }
+
 .extension {
   grid-area: extension;
   display: flex;
   flex-direction: column;
   padding: 30px;
   background-color: #fbffe3;
+  z-index: 9;
 
   @include media-queries.media-small {
     padding: 20px;
@@ -237,6 +290,7 @@ import H4Title from "./H4Title.vue";
   & .header {
     display: flex;
     margin-bottom: 20px;
+
     & .badge_btn {
       background-color: #f5fec1;
     }
@@ -246,6 +300,7 @@ import H4Title from "./H4Title.vue";
         width: 50%;
       }
     }
+
     @include media-queries.media-large {
       flex-direction: column;
       gap: 40px;
@@ -384,6 +439,7 @@ import H4Title from "./H4Title.vue";
           & .cuar {
             display: flex;
             align-items: center;
+
             @include media-queries.media-large {
               width: 24px;
               height: 24px;
@@ -399,7 +455,7 @@ import H4Title from "./H4Title.vue";
               height: 18px;
             }
 
-            & > * {
+            &>* {
               width: 100%;
               height: 100%;
             }
@@ -408,6 +464,7 @@ import H4Title from "./H4Title.vue";
           & .pin {
             display: flex;
             align-items: center;
+
             @include media-queries.media-large {
               width: 11px;
               height: 11px;
@@ -423,7 +480,7 @@ import H4Title from "./H4Title.vue";
               height: 8.73px;
             }
 
-            & > * {
+            &>* {
               width: 100%;
               height: 100%;
             }
@@ -432,6 +489,7 @@ import H4Title from "./H4Title.vue";
           & .more_vert {
             display: flex;
             align-items: center;
+
             @include media-queries.media-large {
               width: 11px;
               height: 11px;
@@ -446,7 +504,8 @@ import H4Title from "./H4Title.vue";
               width: 8.73px;
               height: 8.73px;
             }
-            & > * {
+
+            &>* {
               width: 100%;
               height: 100%;
             }
@@ -454,6 +513,7 @@ import H4Title from "./H4Title.vue";
 
           & p {
             font-weight: 500;
+
             @include media-queries.media-large {
               font-size: 11.07px;
               line-height: 14.76px;
@@ -470,7 +530,7 @@ import H4Title from "./H4Title.vue";
             }
           }
 
-          & > * {
+          &>* {
             cursor: pointer;
           }
         }
@@ -478,6 +538,7 @@ import H4Title from "./H4Title.vue";
     }
   }
 }
+
 .figma_plugin {
   grid-area: figma_plugin;
   background-color: white;
@@ -487,6 +548,8 @@ import H4Title from "./H4Title.vue";
   justify-content: space-between;
   align-items: stretch;
   gap: 12px;
+  z-index: 9;
+  max-width: 750px;
 
   @include media-queries.media-large {
     min-width: 750px;
@@ -501,19 +564,34 @@ import H4Title from "./H4Title.vue";
   @include media-queries.media-small {
     padding: 20px;
   }
+
   & .badge_btn {
     width: 100%;
     background-color: #e5f2ff;
     justify-content: flex-start;
-    font-size: 24px;
-    
-    &:deep(.text) {
-      font-size: 20px;
+
+
+    @include media-queries.media-medium {
+      &:deep(.text) {
+        font-size: 24px;
+      }
+    }
+
+    @include media-queries.media-small {
+      &:deep(.text) {
+        font-size: 20px;
+      }
     }
 
     @include media-queries.media-medium {
       width: auto;
       padding-right: 30px;
+    }
+
+    @media(max-width: 420px) {
+      &:deep(.text) {
+        font-size: 16px;
+      }
     }
   }
 
@@ -527,6 +605,7 @@ import H4Title from "./H4Title.vue";
     background-color: #f3f5f7;
     padding: 0 50px;
     border-radius: 50px;
+
     @include media-queries.media-medium {
       padding: 0 30px;
     }

@@ -1,13 +1,14 @@
 <template>
-  <div class="block" :class="{ active: isSelect }">
-    <p><slot name="text"></slot></p>
-    <div class="icon"><slot name="icon"></slot></div>
+  <div class="block" :class="{ active: currentTag === title }" @click="$emit('select-tag', title)">
+    <p>{{ title }}</p>
+    <div class="icon"><slot></slot></div>
   </div>
 </template>
 
 <script setup>
 defineProps({
-  isSelect: Boolean,
+  currentTag: String,
+  title: String,
 });
 </script>
 
@@ -51,6 +52,7 @@ defineProps({
 
     & p {
       font-size: 15px;
+      line-height: 24px;
     }
   }
 }
