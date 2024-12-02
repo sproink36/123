@@ -161,7 +161,7 @@ import H4Title from "./H4Title.vue";
   }
 
   @include media-queries.media-small {
-    width: 189px;
+    width: 189px; 
     height: 189px;
     top: 310px;
     right: 0;
