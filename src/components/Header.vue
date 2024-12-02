@@ -15,12 +15,22 @@
       </ul>
       <div class="block">
         <GenerateQRButton />
-        <Button class="header__button" borderColor="#18213C" bgColor="#18213C" textColor="white">
+        <Button
+          class="header__button"
+          borderColor="#18213C"
+          bgColor="#18213C"
+          textColor="white"
+        >
           <template v-if="mediaLarge">Войти или зарегистрироваться</template>
           <User v-else />
         </Button>
       </div>
-      <div class="burger-btn" v-if="!mediaLarge" :class="{ burger_open: isOpenBurger }" @click="toggleModal">
+      <div
+        class="burger-btn"
+        v-if="!mediaLarge"
+        :class="{ burger_open: isOpenBurger }"
+        @click="toggleModal"
+      >
         <div class="lines">
           <div class="line"></div>
         </div>
@@ -36,7 +46,13 @@
                   <a href="#">{{ item }}</a>
                 </li>
               </ul>
-              <Button class="burger__btn" borderColor="#18213C" bgColor="#18213C" textColor="white" width="100%">
+              <Button
+                class="burger__btn"
+                borderColor="#18213C"
+                bgColor="#18213C"
+                textColor="white"
+                width="100%"
+              >
                 Сгенерировать куаркод
               </Button>
               <div class="burger__links">
@@ -57,10 +73,9 @@ import { Logo, User } from "../assets/icons";
 import GenerateQRButton from "./GenerateQRButton.vue";
 import Button from "./Button.vue";
 import { useMedia } from "../hooks/useMedia";
-import { nextTick, onBeforeUpdate, onUpdated, ref, watch } from "vue";
-import { useElementSize } from "@vueuse/core";
+import { onUpdated, ref, watch } from "vue";
 
-const mediaLarge = useMedia("(min-width: 1440px)");
+const mediaLarge = useMedia("(min-width: 1520px)");
 const isOpenBurger = ref(false);
 const burgerList = [
   "Преимущества",
@@ -96,7 +111,7 @@ function toggleModal() {
   }
 }
 
-onUpdated(() => { });
+onUpdated(() => {});
 </script>
 
 <style lang="scss" scoped>
@@ -106,35 +121,31 @@ onUpdated(() => { });
 
 .header {
   width: 100%;
-  z-index: 555;
+  // z-index: 60;
   background-color: white;
   position: relative;
 
   @include media-queries.media-large {
-    // padding: 40px 40px 0 40px;
     margin-bottom: 112px;
   }
 
   @include media-queries.media-medium {
     margin: 0 auto 60px auto;
-    width: 688px;
   }
 
   @include media-queries.media-small {
     margin: 0 auto 40px auto;
-    width: 350px;
   }
 
   &.white_wall::after {
     content: "";
-    width: 200%;
     height: 300px;
     position: absolute;
-    bottom: 100%;
+    bottom: 0;
     left: 0;
-    transform: translateX(-50%);
+    right: 0;
     background-color: white;
-    z-index: 999;
+    z-index: 40;
   }
 }
 
@@ -142,7 +153,6 @@ onUpdated(() => { });
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   @include media-queries.media-large {
     max-width: 1840px;
   }
@@ -169,8 +179,7 @@ onUpdated(() => { });
   background-color: #f3f5f7;
 
   @include media-queries.media-large {
-  margin-left: auto;
-    
+    margin-left: auto;
   }
 }
 
@@ -186,8 +195,7 @@ onUpdated(() => { });
   gap: 10px;
 
   @include media-queries.media-large {
-  margin-left: 190px;
-    
+    margin-left: 190px;
   }
 
   @include media-queries.media-medium {
@@ -195,9 +203,6 @@ onUpdated(() => { });
   }
 
   @include media-queries.media-small {
-  }
-
-  @media (max-width: 350px) {
   }
 }
 
@@ -300,6 +305,7 @@ onUpdated(() => { });
   top: 0;
   left: 0;
   opacity: 1;
+  z-index: 11;
 }
 
 .burger-menu {
@@ -309,9 +315,12 @@ onUpdated(() => { });
   width: 100%;
   height: 100%;
   background-color: white;
-  padding: 180px 40px 40px 40px;
+  padding: 180px 0 40px 0;
   overflow-y: auto;
-
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none; 
+  }
   & .burger__list {
     display: flex;
     flex-direction: column;

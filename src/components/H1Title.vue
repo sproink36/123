@@ -34,7 +34,7 @@ h1 {
   @include media-queries.media-small {
     font-size: 36px;
     line-height: 40px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
 }
 </style>

@@ -1,11 +1,11 @@
 <template>
     <div class="block" :style="{ backgroundColor: bgColor }">
-        <div class="container block__container">
+        <div class="block__container">
             <H3Title class="title">
-                <slot name="title" />
+                {{ title }}
             </H3Title>
             <p class="text">
-                <slot name="text" />
+                {{ text }}
             </p>
             <div class="img_block">
                 <img :src="imgSRC">
@@ -17,27 +17,33 @@
 import H3Title from './H3Title.vue';
 defineProps({
     bgColor: String,
+    title: String,
+    text: String,
     imgSRC: String,
 })
+
+
 </script>
-<style lang='scss'>
+<style lang='scss' scoped>
 @use "/src/assets/scss/includes/media-queries";
 
 .block {
+    overflow: hidden;
     position: relative;
     border-radius: 40px;
+    width: 100%;
 
     @include media-queries.media-large {
         height: 542px;
     }
 
     @include media-queries.media-medium {
-        height: 614px;
+        padding-top: 346px;
     }
 
     @include media-queries.media-small {
 
-        height: 369px;
+        padding-top: 203px;
     }
 }
 
@@ -94,7 +100,7 @@ defineProps({
 
 .img_block {
     position: absolute;
-
+overflow: hidden;
     @include media-queries.media-large {
         width: 582px;
         height: 480px;
@@ -116,6 +122,7 @@ defineProps({
         width: 233px;
         height: 193px;
         top: 0;
+        left: 50%;
     }
 
     & img {

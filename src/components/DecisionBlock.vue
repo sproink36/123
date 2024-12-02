@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import H2Title from "./H2Title.vue";
-
 </script>
 
 <template>
   <div class="block">
     <div class="container block_container">
-      <img class="saveKuarCod" src="/src/assets/img/saveKuarCod.png" alt="сохранить куаркод" />
+      <img
+        class="saveKuarCod"
+        src="/src/assets/img/saveKuarCod.png"
+        alt="сохранить куаркод"
+      />
       <div class="wrapper_img">
         <img class="quarCodBlock" src="/src/assets/img/quarCodBlock.png" />
       </div>
@@ -47,7 +50,6 @@ import H2Title from "./H2Title.vue";
 
   @include media-queries.media-large {
     padding-top: 198px;
-
   }
 
   @include media-queries.media-medium {
@@ -89,49 +91,48 @@ img {
 .wrapper_img {
   position: absolute;
   overflow: hidden;
-
+  right: 0;
   @include media-queries.media-large {
     width: 400px;
     height: 400px;
-    bottom: 0;
-    right: min(70px, 0px);
+    bottom: 41px;
+    right: -32px;
   }
 
   @include media-queries.media-medium {
     width: 200px;
-        height: 200px;
-        bottom: 70px;
-        right: -45px;
+    height: 200px;
+    bottom: 27px;
+    right: -12px;
   }
 
   @include media-queries.media-small {
     width: 70px;
     height: 70px;
-    right: 0;
+    // right: 0;
     bottom: 46px;
   }
 }
 
 .quarCodBlock {
+  // transform: scale(1.6);
+  top: 0;
+  left: 0;
 
-  transform: scale(1.6);
-  top: -20px;
+  // @include media-queries.media-large {
+  //   // right: 120px;
+  // }
 
+  // @include media-queries.media-medium {
+  //   top: -20px;
+  //   right: 10px;
+  // }
 
-  @include media-queries.media-large {
-    right: 20px;
-  }
-
-  @include media-queries.media-medium {
-    top: -20px;
-    right: 10px;
-  }
-
-  @include media-queries.media-small {
-    left: -15px;
-    top: -5px;
-    transform: scale(2);
-  }
+  // @include media-queries.media-small {
+  //   left: -15px;
+  //   top: -5px;
+  //   transform: scale(2);
+  // }
 }
 
 .vector {
@@ -141,8 +142,6 @@ img {
   z-index: -100;
   top: 0;
   left: 50%;
-
-
 
   @include media-queries.media-small {
     display: none;
@@ -158,7 +157,7 @@ img {
   left: 50%;
 
   @include media-queries.media-small {
-    display: block
+    display: block;
   }
 }
 

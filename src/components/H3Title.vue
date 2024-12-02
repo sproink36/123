@@ -1,5 +1,5 @@
 <template>
-    <h3>
+    <h3 >
         <slot />
     </h3>
 </template>
@@ -31,7 +31,6 @@ h3 {
         font-size: 24px;
         line-height: 32px;
         text-align: center;
-        height: 64px;
         overflow-wrap: break-word;
     }
 }

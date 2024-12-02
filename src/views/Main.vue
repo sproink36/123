@@ -25,6 +25,10 @@ import BrowserButton from "../components/BrowserButton.vue";
 import H2Title from "../components/H2Title.vue";
 import DecisionBlock from "../components/DecisionBlock.vue";
 import BenefitsSection from "../components/BenefitsSection.vue";
+import PlatformsSection from "../components/PlatformsSection.vue";
+import FAQSection from "../components/FAQSection.vue";
+import Footer from "../components/Footer.vue";
+import QRCodeGeneratorSection from "../components/QRCodeGeneratorSection.vue";
 
 // gsap.registerPlugin(ScrollTrigger);
 
@@ -93,7 +97,7 @@ import BenefitsSection from "../components/BenefitsSection.vue";
   <div class="main">
     <Header />
     <div class="container container_1">
-      <H1Title>
+      <H1Title class="title">
         Сервис генерации<br />
         куаркодов
       </H1Title>
@@ -103,10 +107,15 @@ import BenefitsSection from "../components/BenefitsSection.vue";
       </p>
       <BrowserButton class="main__btn">Скачать для браузера</BrowserButton>
     </div>
-    <!-- <iframe src="/qr-mech/index.html" width="100%"></iframe> -->
+    <div class="container_1">
+      <QRCodeGeneratorSection />
+    </div>
     <DecisionBlock />
     <BenefitsSection />
+    <PlatformsSection />
+    <FAQSection />
   </div>
+  <Footer />
 </template>
 
 <style lang="scss" scoped>
@@ -115,7 +124,7 @@ import BenefitsSection from "../components/BenefitsSection.vue";
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+
   & .main__btn {
     margin-bottom: 120px;
 
@@ -132,11 +141,15 @@ import BenefitsSection from "../components/BenefitsSection.vue";
     }
   }
 }
-
 .container_1 {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
+}
+.title {
+  @include media-queries.media-small {
+    margin-bottom: 20px;
+  }
 }
 
 .sub-title {

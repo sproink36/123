@@ -16,7 +16,6 @@ defineProps({
   borderColor: String,
   bgColor: String,
   textColor: String,
-  width: String,
 });
 </script>
 
