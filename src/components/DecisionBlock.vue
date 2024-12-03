@@ -1,7 +1,10 @@
-<script setup lang="ts">
+<script setup lang="js">
 import H2Title from "./H2Title.vue";
-import saveKuarCod from "/src/assets/img/saveKuarCod.png"
-import quarCodBlock from "/src/assets/img/quarCodBlock.png"
+import saveKuarCod from "/src/assets/img/saveKuarCod.png";
+import quarCodBlock from "/src/assets/img/quarCodBlock.png";
+import Vector from "/src/assets/img/Vector 1.png";
+import Vector1mini from "/src/assets/img/Vector1mini.png";
+
 </script>
 
 <template>
@@ -11,8 +14,8 @@ import quarCodBlock from "/src/assets/img/quarCodBlock.png"
       <div class="wrapper_img">
         <img class="quarCodBlock" :src="quarCodBlock" />
       </div>
-      <img class="vector" src="/src/assets/img/Vector 1.png" />
-      <img class="vector_mini" src="/src/assets/img/Vector1mini.png" />
+      <img class="vector" :src="Vector" />
+      <img class="vector_mini" :src="Vector1mini" />
       <H2Title class="title">
         Преобразуем<br />
         привычные действия <br />

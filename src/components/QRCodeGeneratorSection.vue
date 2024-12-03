@@ -128,7 +128,6 @@ function selectTag(title) {
     justify-content: space-between;
     align-items: flex-start;
     flex-direction: row;
-    max-height: 642px;
     padding-top: 60px;
     padding-bottom: 60px;
   }
@@ -166,9 +165,9 @@ function selectTag(title) {
 
     @include media-queries.media-small {
       &::placeholder {
-      font-size: 14px;
-      line-height: 24px;
-    }
+        font-size: 14px;
+        line-height: 24px;
+      }
     }
   }
 
@@ -272,6 +271,10 @@ function selectTag(title) {
   align-items: flex-start;
   gap: 10px;
   order: 3;
+
+  @include media-queries.media-large {
+    max-height: 589px;
+  }
 
   @include media-queries.media-medium {
     order: 2;
