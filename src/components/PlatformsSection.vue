@@ -3,7 +3,7 @@
     <div class="container platform__container">
       <H2Title class="title">Полный контроль<br />на всех платформах</H2Title>
       <div class="img_wrapper">
-        <img src="/src/assets/img/Portfolio V2 Cover - Copy@2-800x800 1.png">
+        <img :src="Portfolio">
       </div>
       <div class="grid_block">
         <div class="website">
@@ -95,6 +95,7 @@ import ButtonBadge from "./ButtonBadge.vue";
 import Button from "./Button.vue";
 import H2Title from "./H2Title.vue";
 import H4Title from "./H4Title.vue";
+import Portfolio from "/src/assets/img/Portfolio V2 Cover - Copy@2-800x800 1.png"
 </script>
 
 <style lang="scss" scoped>

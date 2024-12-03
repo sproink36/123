@@ -7,23 +7,11 @@
             Бесплатный сервис для создания QR-кодов с расширенными возможностями
             аналитики
           </p>
-          <Button
-            class="btn"
-            borderColor="#18213C"
-            bgColor="#20D647"
-            textColor="#18213C"
-            >Скачать для браузера</Button
-          >
-          <Button
-            class="btn"
-            borderColor="#18213C"
-            bgColor="#18213C"
-            textColor="white"
-            >Сгенерировать куаркод</Button
-          >
+          <Button class="btn" borderColor="#18213C" bgColor="#20D647" textColor="#18213C">Скачать для браузера</Button>
+          <Button class="btn" borderColor="#18213C" bgColor="#18213C" textColor="white">Сгенерировать куаркод</Button>
         </div>
         <div class="img_block">
-          <img src="/src/assets/img/Frame 16.png" alt="" />
+          <img :src="Frame" alt="" />
         </div>
         <div class="block_2">
           <div class="links">
@@ -49,6 +37,7 @@
 
 <script setup lang="js">
 import Button from "./Button.vue"
+import Frame from "/src/assets/img/Frame 16.png"
 </script>
 
 <style lang="scss" scoped>
@@ -58,6 +47,7 @@ import Button from "./Button.vue"
   background-color: #f3f5f7;
   width: 100%;
   padding: 40px 0;
+
   @include media-queries.media-large {
     padding: 80px 0;
   }
@@ -66,6 +56,7 @@ import Button from "./Button.vue"
 .block__container {
   padding-top: 0;
 }
+
 .main_block {
   display: flex;
 
@@ -116,6 +107,7 @@ import Button from "./Button.vue"
 
   & .btn:not(:last-child) {
     margin-bottom: 0;
+
     @include media-queries.media-large {
       margin-bottom: 20px;
     }
@@ -137,7 +129,8 @@ import Button from "./Button.vue"
     order: 3;
     margin-bottom: 40px;
   }
-  & > img {
+
+  &>img {
     width: 100%;
     height: 100%;
   }
@@ -179,6 +172,7 @@ import Button from "./Button.vue"
     }
   }
 }
+
 .footer {
   display: flex;
   align-items: center;
@@ -189,14 +183,17 @@ import Button from "./Button.vue"
     gap: 20px;
     align-items: center;
   }
+
   & a {
     font-size: 18px;
     font-weight: 500;
     line-height: 24px;
     color: #26272a4d;
   }
+
   & a:first-child {
     margin-right: auto;
+
     @include media-queries.media-medium {
       margin-right: 0;
     }

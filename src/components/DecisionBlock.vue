@@ -1,17 +1,15 @@
 <script setup lang="ts">
 import H2Title from "./H2Title.vue";
+import saveKuarCod from "/src/assets/img/saveKuarCod.png"
+import quarCodBlock from "/src/assets/img/quarCodBlock.png"
 </script>
 
 <template>
   <div class="block">
     <div class="container block_container">
-      <img
-        class="saveKuarCod"
-        src="/src/assets/img/saveKuarCod.png"
-        alt="сохранить куаркод"
-      />
+      <img class="saveKuarCod" :src="saveKuarCod" alt="сохранить куаркод" />
       <div class="wrapper_img">
-        <img class="quarCodBlock" src="/src/assets/img/quarCodBlock.png" />
+        <img class="quarCodBlock" :src="quarCodBlock" />
       </div>
       <img class="vector" src="/src/assets/img/Vector 1.png" />
       <img class="vector_mini" src="/src/assets/img/Vector1mini.png" />
@@ -92,6 +90,7 @@ img {
   position: absolute;
   overflow: hidden;
   right: 0;
+
   @include media-queries.media-large {
     width: 400px;
     height: 400px;
