@@ -18,7 +18,6 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import Test from "../components/Test.vue";
 import Header from "../components/Header.vue";
 import H1Title from "../components/H1Title.vue";
 import BrowserButton from "../components/BrowserButton.vue";
