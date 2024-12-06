@@ -28,6 +28,10 @@ defineProps({
   cursor: pointer;
   padding: 15px 30px;
 
+  &:hover {
+    background-color: #18213C1A;
+  }
+
   & .icon {
     width: 24px;
     height: 24px;

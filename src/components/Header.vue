@@ -1,5 +1,6 @@
 <template>
   <header class="header" :class="{ white_wall: isOpenBurger }">
+    
     <div class="container header__container">
       <Logo class="header__logo" />
       <ul class="list" v-if="mediaLarge">

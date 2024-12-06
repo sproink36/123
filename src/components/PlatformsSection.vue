@@ -2,9 +2,13 @@
   <div class="platform">
     <div class="container platform__container">
       <H2Title class="title">Полный контроль<br />на всех платформах</H2Title>
-      <div class="img_wrapper">
-        <img :src="Portfolio">
+      <!-- <div class="img_wrapper">
+        <img :src="Portfolio">  
+      </div> -->
+      <div class="spline">
+        <spline-viewer id="platform-spline-viewer" url="https://prod.spline.design/al5tj5WEgHN5DC-5/scene.splinecode"></spline-viewer>
       </div>
+
       <div class="grid_block">
         <div class="website">
           <div class="header">
@@ -95,7 +99,25 @@ import ButtonBadge from "./ButtonBadge.vue";
 import Button from "./Button.vue";
 import H2Title from "./H2Title.vue";
 import H4Title from "./H4Title.vue";
-import Portfolio from "/src/assets/img/Portfolio V2 Cover - Copy@2-800x800 1.png"
+import { onMounted } from "vue";
+
+onMounted(() => {
+  const splineViewer = document.getElementById('platform-spline-viewer');
+
+  if (splineViewer && splineViewer.shadowRoot) {
+    const style = document.createElement('style');
+    style.textContent = `
+        a {
+            display: none !important; /* Скрытие ссылок */
+        }
+        #spline {
+        width: 100% !important; 
+        height: 100% !important; 
+    }
+    `;
+    splineViewer.shadowRoot.appendChild(style);
+  }
+})
 </script>
 
 <style lang="scss" scoped>
@@ -132,6 +154,46 @@ import Portfolio from "/src/assets/img/Portfolio V2 Cover - Copy@2-800x800 1.png
   }
 }
 
+.spline {
+  position: absolute;
+
+
+  overflow: hidden;
+  z-index: 8;
+
+  &>spline-viewer {
+    height: 100%;
+    width: 100%;
+
+  }
+
+  @include media-queries.media-large {
+    top: 260px;
+    left: 600px;
+    width: 600px;
+    height: 600px;
+  }
+
+  @include media-queries.media-medium {
+    right: -20px;
+    top: 300px;
+    height: 404px;
+    width: 404px;
+  }
+
+  @include media-queries.media-small {
+    right: -20px;
+    top: 320px;
+    height: 189px;
+    width: 189px;
+  }
+
+}
+
+spline-viewer a {
+  display: none !important;
+}
+
 .img_wrapper {
   position: absolute;
   width: 628px;
@@ -162,10 +224,11 @@ import Portfolio from "/src/assets/img/Portfolio V2 Cover - Copy@2-800x800 1.png
   }
 
   @include media-queries.media-small {
-    width: 189px; 
+    width: 189px;
     height: 189px;
     top: 310px;
     right: 0;
+
     & img {
       top: 0px;
       left: 75px;
