@@ -46,35 +46,33 @@ const data = [
     {bgColor:"#FBFFE3", title:"Ведите проекты без лишних забот",text:"Управляйте проектами легко и без стресса. Все инструменты под рукой — просто и эффективно.", Loader: qr },
     {bgColor: "#F7E8FF", title:"Удобно и на сайте,и в расширении",text:"Используйте наш сервис как на сайте, так и в расширении для браузера. Вся функциональность — там, где вам удобнее.", Loader: coin}
 ]
+
 onMounted(() => {
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 const cards = gsap.utils.toArray(".block__card_anim");
-const tl = gsap.timeline();
+// const panelOffset = panelRef.value?.offsetTop || 0;
+// console.log(panelOffset);
+const panelOffset = document.querySelector(".benefits").querySelector(".block__card_anim").clientHeight;
 
-cards.forEach((panel, index) => {
-  let scale = 1;
 
-  // If the current image is not the last one, adjust the scale based on its index  
-  if (index !== cards.length - 1) {
-    scale = 0.9 + 0.025 * index; // Create a slight scaling effect for images based on their index
-  }
-
-  gsap.to(panel, {
-    scale: scale,
-    transformOrigin: "top center",
-    ease: "none",
-    scrollTrigger: {
-      trigger: panel,
-      start: "top " + (70 + 40 * index),
-      end: "bottom +=650px",
-      endTrigger: ".end",
-      pin: true, // Pin the current panel/image in place while it is being triggered
-      pinSpacing: false, // Disable additional spacing around pinned elements
-      scrub: true, 
-      markers: true,
-    }
-  })
-})
+// cards.forEach((panel, index) => {
+//   ScrollTrigger.matchMedia({"(min-width: 1520px)": () => {
+//     gsap.to(panel, {
+//     transformOrigin: "top center",
+//     ease: "none",
+//     scrollTrigger: {
+//       trigger: panel,
+//       start: "top-=200 " + (100 * index),
+//       end: `bottom ${panelOffset}`,
+//       endTrigger: ".end",
+//       pin: true, // Pin the current panel/image in place while it is being triggered
+//       pinSpacing: false, // Disable additional spacing around pinned elements
+//       scrub: true,
+//       markers: true,
+//     }
+//   })
+//   }})
+// })
 
 // gsap.timeline({
 //   scrollTrigger: {
@@ -110,11 +108,11 @@ cards.forEach((panel, index) => {
 @use "/src/assets/scss/includes/media-queries";
 
 .benefits {
-  overflow: hidden;
+  // overflow: hidden;
   width: 100%;
 
   @include media-queries.media-large {
-    margin-bottom: 120px;
+    margin-bottom: 240px;
   }
 
   @include media-queries.media-medium {
@@ -144,7 +142,7 @@ cards.forEach((panel, index) => {
 .block {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  // overflow: hidden;
 
   @include media-queries.media-large {
     & div:not(:first-child) {

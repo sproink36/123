@@ -6,12 +6,28 @@ import Vector from "/src/assets/img/Vector 1.png";
 import Vector1mini from "/src/assets/img/Vector1mini.png";
 import { onMounted, ref } from "vue";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+import { ScrollToPlugin } from "gsap/all";
 
 const saveKuarCodRef = ref(null);
 const quarCodBlockRef = ref(null)
-
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 onMounted(() => {
-  gsap.to(saveKuarCodRef.value, {
+
+  ScrollTrigger.matchMedia({
+    "(min-width: 1520px)": () => {
+      gsap.to(quarCodBlockRef.value, {
+      y: 110,
+      x: 5,
+      rotateZ: -25,
+      duration: 4, // Время анимации
+      yoyo: true, // Включение обратной анимации
+      repeat: -1, // Зацикливаем анимацию
+      ease: "power1.inOut", // Плавное изменение скорости
+      transformOrigin: "center center"
+    })
+
+    gsap.to(saveKuarCodRef.value, {
     y: 30,
     x: 10,
     rotateZ: 20,
@@ -21,17 +37,9 @@ onMounted(() => {
     ease: "power1.inOut", // Плавное изменение скорости
     transformOrigin: "center right"
   })
-
-  gsap.to(quarCodBlockRef.value, {
-    y: 110,
-    x: 5,
-    rotateZ: -25,
-    duration: 4, // Время анимации
-    yoyo: true, // Включение обратной анимации
-    repeat: -1, // Зацикливаем анимацию
-    ease: "power1.inOut", // Плавное изменение скорости
-    transformOrigin: "center center"
+    }
   })
+
 })
 </script>
 
@@ -44,7 +52,7 @@ onMounted(() => {
         alt="сохранить куаркод"
         ref="saveKuarCodRef"
       />
-      <div class="wrapper_img" ref="quarCodBlockRef" >
+      <div class="wrapper_img" ref="quarCodBlockRef">
         <img class="quarCodBlock" :src="quarCodBlock" />
       </div>
       <img class="vector" :src="Vector" />

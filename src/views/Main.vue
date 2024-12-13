@@ -244,7 +244,7 @@ onMounted(() => {
 .main {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  // align-items: center;
 
   & .main__container {
     padding-top: 0;
@@ -293,8 +293,8 @@ onMounted(() => {
 }
 
 .section_anim_BenefitsSection {
-  min-height: 100vh;
-  overflow: hidden;
+  // min-height: 100vh;
+  // overflow: hidden;
 }
 
 .container_1 {
