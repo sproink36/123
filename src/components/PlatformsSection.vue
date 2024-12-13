@@ -2,9 +2,6 @@
   <div class="platform">
     <div class="container platform__container">
       <H2Title class="title">Полный контроль<br />на всех платформах</H2Title>
-      <!-- <div class="img_wrapper">
-        <img :src="Portfolio">  
-      </div> -->
       <div class="spline">
         <spline-viewer id="platform-spline-viewer" url="https://prod.spline.design/al5tj5WEgHN5DC-5/scene.splinecode"></spline-viewer>
       </div>
@@ -26,7 +23,7 @@
             Всё под рукой для<br />
             удобства и продуктивности.
           </p>
-          <Button class="btn" borderColor="#18213C" bgColor="#18213C" textColor="white">Подробнее</Button>
+          <Button class="btn" btnType="black">Подробнее</Button>
         </div>
         <div class="extension">
           <div class="header">
@@ -69,7 +66,7 @@
                 </div>
               </div>
             </div>
-            <Button class="btn" borderColor="#18213C" bgColor="#18213C" textColor="white">Подробнее</Button>
+            <Button class="btn" btnType="black">Подробнее</Button>
           </div>
         </div>
         <div class="figma_plugin">

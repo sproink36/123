@@ -8,8 +8,9 @@ import KianuMob from "../animations/mob/kianu.json";
 import DedMob from "../animations/mob/ded.json";
 import FireMob from "../animations/mob/fire.json";
 import JdunMob from "../animations/mob/jdun.json";
-import { onMounted, ref } from "vue";
+import { nextTick, onMounted, ref, watch } from "vue";
 import gsap from "gsap";
+import { ScrollToPlugin } from "gsap/all";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "toolcool-range-slider";
 import Swiper from "swiper";
@@ -28,6 +29,7 @@ import PlatformsSection from "../components/PlatformsSection.vue";
 import FAQSection from "../components/FAQSection.vue";
 import Footer from "../components/Footer.vue";
 import QRCodeGeneratorSection from "../components/QRCodeGeneratorSection.vue";
+import { useMedia } from "../hooks/useMedia";
 
 // gsap.registerPlugin(ScrollTrigger);
 
@@ -90,13 +92,122 @@ import QRCodeGeneratorSection from "../components/QRCodeGeneratorSection.vue";
 //     slidesPerView: 1,
 //   });
 // });
+
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+const qrGenerator = ref();
+const main = ref();
+const header = ref();
+
+// function getElementPositionByHeight(className) {
+//   const element = document.querySelector(className); // Находим элемент по классу
+
+//   if (!element) {
+//     console.error("Элемент с таким классом не найден");
+//     return;
+//   }
+
+//   // Получаем позицию элемента относительно всего документа
+//   const rect = element.getBoundingClientRect();
+//   const position = rect.top + window.scrollY; // Положение относительно начала страницы
+
+//   return position;
+// }
+
+// const isScrollingDown = ref(false); // Переменная для отслеживания прокрутки вниз
+// const isScrollingUp = ref(false); // Переменная для отслеживания прокрутки вверх
+
+let lastScrollY = 0; // Переменная для хранения предыдущей позиции прокрутки
+
+const getElementPositionByHeight = (className) => {
+  const element = document.querySelector(className);
+  if (element) {
+    return element.getBoundingClientRect().height; // Получаем высоту через getBoundingClientRect()
+  }
+  return 0; // Возвращаем 0, если элемент не найден
+};
+
+const handleScroll = () => {
+  const currentScrollY = window.scrollY;
+
+  if (currentScrollY > lastScrollY) {
+    // Если прокрутка вниз
+    gsap.to(".main__header", { y: "-100%", opacity: 0, duration: 0.7 });
+    // isScrollingDown.value = true;
+    // isScrollingUp.value = false;
+  } else {
+    gsap.to(".main__header", { y: 0, opacity: 1, duration: 0.7 });
+    // isScrollingDown.value = false;
+    // isScrollingUp.value = true;
+  }
+  // console.log(isScrollingDown.value, isScrollingUp.value);
+
+  // Обновляем последнюю позицию прокрутки
+  lastScrollY = currentScrollY;
+};
+
+const childComponent = ref(null);
+onMounted(() => {
+  const mediaLarge = useMedia("(min-width: 1520px)");
+  const mediaMedium = useMedia("(min-width: 768px) and (max-width: 1519px)");
+  const mediaSmall = useMedia("(max-width: 768px)");
+  
+  const updateMainPadding = () => {
+    let mainPaddingTop = 0;
+
+    if (mediaLarge.value) {
+      mainPaddingTop = 100;
+    } else if (mediaMedium.value) {
+      mainPaddingTop = 60;
+    } else if (mediaSmall.value) {
+      mainPaddingTop = 40;
+    }
+
+    const headerHeight = getElementPositionByHeight(".main__header");
+    main.value.style.paddingTop = `calc(${headerHeight}px + ${mainPaddingTop}px)`;
+  };
+
+  // Update padding when window resizes
+  watch([mediaLarge, mediaMedium, mediaSmall], updateMainPadding);
+
+  // Initial setup
+  updateMainPadding();
+
+  window.addEventListener("scroll", handleScroll);
+
+  ScrollTrigger.matchMedia({
+    "(min-width: 1520px)": () => {
+      ".section_anim_QRCodeGeneratorSection",
+        ScrollTrigger.create({
+          trigger: ".main",
+          start: "top+=1 top", // Анимация активируется в указанной позиции
+          once: true, // Анимация срабатывает только один раз
+          markers: true,
+          onEnter: () => {
+            if (window.scrollY < 100) {
+              gsap.to(window, {
+                scrollTo: {
+                  y: ".section_anim_QRCodeGeneratorSection",
+                  autoKill: false,
+                },
+                duration: 1.8,
+              });
+            }
+            // Вызываем метод дочернего компонента
+            childComponent.value?.animateSection();
+            // gsap.to(".section_anim_QRCodeGeneratorSection", {minHeight: "100vh"}, "<");
+            // gsap.to(".main__header", { y: 60, duration: 0.7});
+          },
+        });
+    },
+  });
+});
 </script>
 
 <template>
-  <div class="main">
-    <Header />
-    <div class="container container_1">
-      <H1Title class="title">
+  <div class="main" ref="main">
+    <Header class="main__header" ref="main__header" />
+    <div class="container container_1 main__container">
+      <H1Title class="title container_1__title-h1">
         Сервис генерации<br />
         куаркодов
       </H1Title>
@@ -104,17 +215,28 @@ import QRCodeGeneratorSection from "../components/QRCodeGeneratorSection.vue";
         Бесплатный сервис для создания QR-кодов<br />с расширенными
         возможностями аналитики
       </p>
-      <BrowserButton class="main__btn">Скачать для браузера</BrowserButton>
+      <BrowserButton class="main__btn main__btn_anim"
+        >Скачать для браузера</BrowserButton
+      >
     </div>
-    <div class="container_1">
-      <QRCodeGeneratorSection />
+    <div
+      class="container_1 section_anim section_anim_QRCodeGeneratorSection"
+      ref="qrGenerator"
+    >
+      <QRCodeGeneratorSection ref="childComponent" />
     </div>
-    <DecisionBlock />
-    <BenefitsSection />
-    <PlatformsSection />
+    <div class="section_anim_DecisionBlock">
+      <DecisionBlock />
+    </div>
+    <div class="section_anim_BenefitsSection">
+      <BenefitsSection />
+    </div>
+    <div class="section_anim section_anim_PlatformsSection">
+      <PlatformsSection />
+    </div>
     <FAQSection />
+    <Footer />
   </div>
-  <Footer />
 </template>
 
 <style lang="scss" scoped>
@@ -123,6 +245,10 @@ import QRCodeGeneratorSection from "../components/QRCodeGeneratorSection.vue";
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  & .main__container {
+    padding-top: 0;
+  } 
 
   & .main__btn {
     margin-bottom: 120px;
@@ -140,6 +266,37 @@ import QRCodeGeneratorSection from "../components/QRCodeGeneratorSection.vue";
     }
   }
 }
+
+.main__header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.anim_cont {
+  scroll-snap-type: y mandatory;
+}
+
+.section_anim_QRCodeGeneratorSection {
+  @include media-queries.media-large {
+    min-height: 100vh;
+  }
+}
+
+.section_anim {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: start;
+}
+
+.section_anim_BenefitsSection {
+  min-height: 100vh;
+  overflow: hidden;
+}
+
 .container_1 {
   display: flex;
   flex-direction: column;
@@ -149,6 +306,10 @@ import QRCodeGeneratorSection from "../components/QRCodeGeneratorSection.vue";
   @include media-queries.media-small {
     margin-bottom: 20px;
   }
+}
+
+.container_1__title-h1 {
+  // opacity: 0;
 }
 
 .sub-title {

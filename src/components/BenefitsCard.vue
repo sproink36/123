@@ -77,6 +77,11 @@ defineProps({
 }
 
 .title {
+  z-index: 10;
+}
+
+.animation_container {
+z-index: 9;
 }
 
 .text {
@@ -87,6 +92,7 @@ defineProps({
   font-weight: 400;
   text-wrap: balance;
   width: 100%;
+  z-index: 10;
 
   @include media-queries.media-large {
     line-height: 32px;

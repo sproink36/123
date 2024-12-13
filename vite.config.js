@@ -1,27 +1,27 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
   chockidarWatchOptions: {
-    usePolling: true
+    usePolling: true,
   },
-  base: '',
+  base: "",
   build: {
-    target: 'es2015'
+    target: "es2015",
   },
   css: {
     preprocessorOptions: {
       scss: {
-        api: 'modern' // or "modern"
-      }
-    }
+        api: "modern", // or "modern"
+      },
+    },
   },
   server: {
     watch: {
-      usePolling: true
+      usePolling: true,
     },
-    port: 3000
-  }
-})
+    port: 3000,
+  },
+});

@@ -1,5 +1,19 @@
 <template>
-  <div class="block">
+  <div class="block" @mousemove="handleMouseMove">
+    <div id="cursorTrailContainer">
+      <TransitionGroup name="fade" tag="div">
+        <div
+          v-for="element in trailElements"
+          :key="element.id"
+          class="cursor-element"
+          :style="{
+            left: `${element.x}px`,
+            top: `${element.y}px`,
+            backgroundImage: `url(${element.image})`,
+          }"
+        ></div>
+      </TransitionGroup>
+    </div>
     <div class="container block__container">
       <div class="main_block">
         <div class="block_1">
@@ -7,8 +21,8 @@
             Бесплатный сервис для создания QR-кодов с расширенными возможностями
             аналитики
           </p>
-          <Button class="btn" borderColor="#18213C" bgColor="#20D647" textColor="#18213C">Скачать для браузера</Button>
-          <Button class="btn" borderColor="#18213C" bgColor="#18213C" textColor="white">Сгенерировать куаркод</Button>
+          <Button class="btn" btnType="green">Скачать для браузера</Button>
+          <Button class="btn" btnType="black">Сгенерировать куаркод</Button>
         </div>
         <div class="img_block">
           <img :src="Frame" alt="" />
@@ -36,8 +50,63 @@
 </template>
 
 <script setup lang="js">
+import { reactive, ref } from "vue";
 import Button from "./Button.vue"
 import Frame from "/src/assets/img/Frame 16.png"
+import Image4 from "/src/assets/img/Frame 60.png";
+import Image1 from "/src/assets/img/Frame 61.png";
+import Image3 from "/src/assets/img/Sticker01.png";
+import Image2 from "/src/assets/img/Vector-zvezd.png";
+import Image5 from "/src/assets/img/Vector.png";
+
+const images = [Image1, Image2, Image3, Image4, Image5];
+    const trailElements = reactive([]); // Массив для следов
+    const lastPosition = ref({ x: 0, y: 0 }); // Последняя позиция курсора
+    const distanceThreshold = 135; // Минимальное расстояние для срабатывания
+    const imageIndex = ref(0); // Текущий индекс изображения
+    let uniqueId = 0; // Уникальный идентификатор для каждого элемента
+    const delayInterval = 100;
+
+function getNextImage() {
+  const image = images[imageIndex.value];
+      imageIndex.value = (imageIndex.value + 1) % images.length; // Циклический переход
+      return image;
+}
+
+function addElementWithDelay (x, y, delay) {
+      setTimeout(() => {
+        trailElements.push({
+          id: uniqueId++, // Уникальный ID для элемента
+          x,
+          y,
+          image: getNextImage(),
+        });
+
+        // Удаляем элемент через 1 секунду
+        setTimeout(() => {
+          trailElements.shift();
+        }, 500);
+      }, delay);
+    };
+
+function handleMouseMove(event) {
+  const parentRect = event.currentTarget.getBoundingClientRect();
+  const cursorX = event.clientX - parentRect.left;
+  const cursorY = event.clientY - parentRect.top;
+
+      // Вычисляем пройденное расстояние
+      const distance = Math.sqrt(
+        Math.pow(cursorX - lastPosition.value.x, 2) +
+        Math.pow(cursorY - lastPosition.value.y, 2)
+      );
+
+      if (distance >= distanceThreshold) {
+       addElementWithDelay(cursorX, cursorY,delayInterval);
+
+        // Обновляем последнюю позицию
+        lastPosition.value = { x: cursorX, y: cursorY };
+      }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -47,9 +116,54 @@ import Frame from "/src/assets/img/Frame 16.png"
   background-color: #f3f5f7;
   width: 100%;
   padding: 40px 0;
+  position: relative;
+  overflow: hidden;
 
   @include media-queries.media-large {
     padding: 80px 0;
+  }
+
+  & #cursorTrailContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+
+  & .cursor-element {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 1;
+    z-index: 10;
+  }
+
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.5s, transform 0.5s;
+  }
+
+  .fade-enter-from {
+    opacity: 0;
+    transform: scale(0.5) rotateZ(25deg);
+  }
+
+  .fade-enter-to {
+    opacity: 1;
+    transform: scale(1) rotateZ(0deg) translateX(20px);
+  }
+
+  .fade-leave-from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .fade-leave-to {
+    opacity: 0;
+    transform: scale(0.5);
   }
 }
 
@@ -75,6 +189,7 @@ import Frame from "/src/assets/img/Frame 16.png"
   flex-direction: column;
   width: 330px;
   order: 1;
+  z-index: 15;
 
   @include media-queries.media-medium {
     width: 100%;
@@ -130,7 +245,7 @@ import Frame from "/src/assets/img/Frame 16.png"
     margin-bottom: 40px;
   }
 
-  &>img {
+  & > img {
     width: 100%;
     height: 100%;
   }
@@ -140,6 +255,7 @@ import Frame from "/src/assets/img/Frame 16.png"
   order: 3;
   display: flex;
   gap: 60px;
+  z-index: 15;
 
   @include media-queries.media-medium {
     order: 2;
@@ -189,6 +305,7 @@ import Frame from "/src/assets/img/Frame 16.png"
     font-weight: 500;
     line-height: 24px;
     color: #26272a4d;
+    z-index: 15;
   }
 
   & a:first-child {

@@ -4,14 +4,47 @@ import saveKuarCod from "/src/assets/img/saveKuarCod.png";
 import quarCodBlock from "/src/assets/img/quarCodBlock.png";
 import Vector from "/src/assets/img/Vector 1.png";
 import Vector1mini from "/src/assets/img/Vector1mini.png";
+import { onMounted, ref } from "vue";
+import gsap from "gsap";
 
+const saveKuarCodRef = ref(null);
+const quarCodBlockRef = ref(null)
+
+onMounted(() => {
+  gsap.to(saveKuarCodRef.value, {
+    y: 30,
+    x: 10,
+    rotateZ: 20,
+    duration: 4, // Время анимации
+    yoyo: true, // Включение обратной анимации
+    repeat: -1, // Зацикливаем анимацию
+    ease: "power1.inOut", // Плавное изменение скорости
+    transformOrigin: "center right"
+  })
+
+  gsap.to(quarCodBlockRef.value, {
+    y: 110,
+    x: 5,
+    rotateZ: -25,
+    duration: 4, // Время анимации
+    yoyo: true, // Включение обратной анимации
+    repeat: -1, // Зацикливаем анимацию
+    ease: "power1.inOut", // Плавное изменение скорости
+    transformOrigin: "center center"
+  })
+})
 </script>
 
 <template>
   <div class="block">
     <div class="container block_container">
-      <img class="saveKuarCod" :src="saveKuarCod" alt="сохранить куаркод" />
-      <div class="wrapper_img">
+      <img
+        class="saveKuarCod"
+        :src="saveKuarCod"
+        alt="сохранить куаркод"
+        ref="saveKuarCodRef"
+      />
+      <div class="wrapper_img" ref="quarCodBlockRef" >
         <img class="quarCodBlock" :src="quarCodBlock" />
       </div>
       <img class="vector" :src="Vector" />
@@ -68,6 +101,8 @@ img {
 }
 
 .saveKuarCod {
+  // transform-origin: "top right";
+
   @include media-queries.media-large {
     top: -40px;
     left: -20px;
@@ -93,6 +128,7 @@ img {
   position: absolute;
   overflow: hidden;
   right: 0;
+  z-index: -40;
 
   @include media-queries.media-large {
     width: 400px;

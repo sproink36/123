@@ -1,27 +1,33 @@
 <template>
   <header class="header" :class="{ white_wall: isOpenBurger }">
-    
     <div class="container header__container">
       <Logo class="header__logo" />
       <ul class="list" v-if="mediaLarge">
         <li class="item">
-          <a class="link" ef="#">Преимущества</a>
+          <a class="link" ef="#">
+            <span class="link_text link_defualt">Преимущества</span>
+            <span class="link_text link_copy">Преимущества</span>
+            <span class="link_hidden">Преимущества</span>
+          </a>
         </li>
         <li class="item">
-          <a class="link" ef="#">Расширение/плагин</a>
+          <a class="link" ef="#">
+            <span class="link_text link_defualt">Расширение/плагин</span>
+            <span class="link_text link_copy">Расширение/плагин</span>
+            <span class="link_hidden">Расширение/плагин</span>
+          </a>
         </li>
         <li class="item">
-          <a class="link" ef="#">FAQ</a>
+          <a class="link" ef="#">
+            <span class="link_text link_defualt">FAQ</span>
+            <span class="link_text link_copy">FAQ</span>
+            <span class="link_hidden">FAQ</span>
+          </a>
         </li>
       </ul>
       <div class="block">
         <GenerateQRButton />
-        <Button
-          class="header__button"
-          borderColor="#18213C"
-          bgColor="#18213C"
-          textColor="white"
-        >
+        <Button class="header__button" btnType="black">
           <template v-if="mediaLarge">Войти или зарегистрироваться</template>
           <User v-else />
         </Button>
@@ -49,10 +55,7 @@
               </ul>
               <Button
                 class="burger__btn"
-                borderColor="#18213C"
-                bgColor="#18213C"
-                textColor="white"
-                width="100%"
+                btnType="black"
               >
                 Сгенерировать куаркод
               </Button>
@@ -104,7 +107,8 @@ watch(mediaLarge, () => {
 function toggleModal() {
   isOpenBurger.value = !isOpenBurger.value;
   document.body.classList.toggle("frozen");
-  if (isOpenBurger.value) {
+  // add && mediaLarge.value
+  if (isOpenBurger.value && mediaLarge.value) {
     window.scrollTo({
       top: 0,
       behavior: "smooth", // Плавная прокрутка
@@ -157,6 +161,10 @@ onUpdated(() => {});
   @include media-queries.media-large {
     max-width: 1840px;
   }
+
+  @include media-queries.media-medium {
+    padding-bottom: 20px;
+  }
 }
 
 .header__logo {
@@ -184,11 +192,51 @@ onUpdated(() => {});
   }
 }
 
+.item {
+  overflow: hidden;
+}
+
 .link {
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 133%;
+  position: relative;
+  // font-weight: 500;
+  // font-size: 18px;
+  // line-height: 133%;
   cursor: pointer;
+
+  & .link_hidden {
+    visibility: hidden;
+  }
+
+  & .link_text {
+    position: absolute;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 133%;
+    transition: top 0.3s ease;
+  }
+
+  & .link_defualt {
+    top: 0;
+  }
+
+  & .link_copy {
+    top: 100%;
+    color: #18213C99;
+  }
+
+  &:hover .link_defualt {
+    top: -100%;
+  }
+
+  &:hover .link_copy {
+    top: 0;
+  }
 }
 
 .block {
@@ -320,7 +368,7 @@ onUpdated(() => {});
   overflow-y: auto;
   scrollbar-width: none;
   &::-webkit-scrollbar {
-    display: none; 
+    display: none;
   }
   & .burger__list {
     display: flex;

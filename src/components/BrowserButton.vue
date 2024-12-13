@@ -1,13 +1,6 @@
 <template>
-  <div class="block">
-    <Button
-      class="btn"
-      borderColor="#18213C"
-      bgColor="#20D647"
-      textColor="#18213C"
-      width="297px"
-      ><slot></slot
-    ></Button>
+  <div class="block" :class="{ disabled: disabled }">
+    <Button class="btn" btnType="green"><slot></slot></Button>
     <Browser class="browser" />
   </div>
 </template>
@@ -15,6 +8,10 @@
 <script setup>
 import Button from "./Button.vue";
 import { Browser } from "../assets/icons";
+
+defineProps({
+  disabled: Boolean,
+});
 </script>
 
 <style lang="scss" scoped>
@@ -27,6 +24,23 @@ import { Browser } from "../assets/icons";
   box-shadow: 0 0 0 2px $black;
   border-radius: 100px;
   align-self: center;
+
+  &:hover .browser {
+    fill: #0dc134;
+  }
+
+  &:active .browser {
+    fill: #0eb231;
+  }
+
+  &:last-child {
+    pointer-events: auto;
+  }
+
+  &.disabled {
+    opacity: 20%;
+    pointer-events: none;
+  }
 
   @include media-queries.media-large {
     width: 391px;
@@ -71,6 +85,7 @@ import { Browser } from "../assets/icons";
     top: 50%;
     right: 42.67px;
     transform: translateY(-50%);
+    fill: $black;
 
     @media (max-width: 389px) {
       right: 15%;
